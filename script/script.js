@@ -23,25 +23,21 @@ function Book(title, author, pages, read) {
   this.read = read;
   this.info = function () {
     if (this.read) {
-      return `<div class="card" style="width: 18rem;">
-    <div class="card-body">
+      return `<div class="card-body">
       <h5 class="card-title">${this.title}</h5>
       <h6 class="card-subtitle mb-2 text-muted">${this.author}</h6>
       <p class="card-text">
       ${this.pages} pages, already read.
       </p>
-    </div>
-  </div>`;
+    </div>`;
     }
-    return `<div class="card" style="width: 18rem;">
-    <div class="card-body">
+    return `<div class="card-body">
       <h5 class="card-title">${this.title}</h5>
       <h6 class="card-subtitle mb-2 text-muted">${this.author}</h6>
       <p class="card-text">
       ${this.pages} pages, not read yet.
       </p>
-    </div>
-  </div>`;
+    </div>`;
   };
 }
 
@@ -50,14 +46,21 @@ function addBook(title, author, pages, read) {
 }
 
 function render(books) {
-  books.forEach(function (b) {
+  let html = "";
+  books.forEach(function (b, i) {
     // Output to HTML
-    document.getElementById("books_list").innerHTML += b.info();
+    html += `<div data-attribute="book_${i}" class="card" style="width: 18rem;">
+    ${b.info()}
+    </div>`;
   });
+  document.getElementById("books_list").innerHTML = html;
 }
 
 function renderLast(books){
-  document.getElementById("books_list").innerHTML += books[books.length - 1].info();
+   let html = `<div data-attribute="book_${books.length - 1}" class="card" style="width: 18rem;">
+   ${books[books.length - 1].info()}
+   </div>`;
+   document.getElementById("books_list").innerHTML = html;
 }
 
 // const book1 = new Book("Lazarillo de Tormes", "Anonimo");
