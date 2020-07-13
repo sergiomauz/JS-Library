@@ -1,5 +1,13 @@
 let books = [];
 
+function showForm() {
+  document.getElementById("frmNewBook").className = "card";
+}
+
+function hideForm() {
+  document.getElementById("frmNewBook").className = "card d-none";
+}
+
 function Book(title, author, pages) {
   this.title = title;
   this.author = author;
@@ -50,3 +58,13 @@ addBook("Lazarillo de Tormes2", "Anonimo2", 200);
 addBook("Lazarillo de Tormes3", "Anonimo3", 300);
 
 render(books);
+
+document.getElementById("btnNewBook").addEventListener("click", function () {
+  showForm();
+});
+
+document
+  .getElementById("btnCancelNewBook")
+  .addEventListener("click", function () {
+    hideForm();
+  });

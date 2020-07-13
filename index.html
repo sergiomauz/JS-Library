@@ -25,9 +25,7 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="books_list"></div>
-
-    <div class="card">
+    <div id="frmNewBook" class="card d-none">
       <div class="card-header"><h3>New Book</h3></div>
       <div class="card-body">
         <div class="form-group">
@@ -62,10 +60,16 @@
           <label class="form-check-label" for="chkRead">Already read</label>
         </div>
         <button type="submit" class="btn btn-primary">Add</button>
+        <button id="btnCancelNewBook" type="submit" class="btn btn-light">
+          Cancel
+        </button>
       </div>
     </div>
 
-    <button class="btn btn-secondary mt-3">New Book</button>
+    <button id="btnNewBook" class="btn btn-secondary mt-3">New Book</button>
+
+    <div id="books_list"></div>
+
     <script src="script/script.js"></script>
   </body>
 </html>
