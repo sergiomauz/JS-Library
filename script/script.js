@@ -1,4 +1,4 @@
-let books = []
+let books = [];
 
 function Book(title, author, pages) {
   this.title = title;
@@ -7,8 +7,7 @@ function Book(title, author, pages) {
   this.read = false;
   this.info = function () {
     if (this.read) {
-
- return `<div class="card" style="width: 18rem;">
+      return `<div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">${this.title}</h5>
       <h6 class="card-subtitle mb-2 text-muted">${this.author}</h6>
@@ -16,7 +15,7 @@ function Book(title, author, pages) {
       ${this.pages} pages, already read.
       </p>
     </div>
-  </div>`
+  </div>`;
     }
     return `<div class="card" style="width: 18rem;">
     <div class="card-body">
@@ -30,17 +29,15 @@ function Book(title, author, pages) {
   };
 }
 
-function addBook(title, author, pages){
+function addBook(title, author, pages) {
   books.push(new Book(title, author, pages));
 }
 
-function render(books){
-  books.forEach(
-    function(b){
-      // Output to HTML
-      document.getElementById("books_list").innerHTML += b.info();
-    }
-  );
+function render(books) {
+  books.forEach(function (b) {
+    // Output to HTML
+    document.getElementById("books_list").innerHTML += b.info();
+  });
 }
 
 // const book1 = new Book("Lazarillo de Tormes", "Anonimo");
