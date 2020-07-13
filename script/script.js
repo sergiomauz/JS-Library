@@ -7,9 +7,26 @@ function Book(title, author, pages) {
   this.read = false;
   this.info = function () {
     if (this.read) {
-      return `${this.title} by ${this.author}, ${this.pages} pages, already read.`;
+
+ return `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${this.title}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">${this.author}</h6>
+      <p class="card-text">
+      ${this.pages} pages, already read.
+      </p>
+    </div>
+  </div>`
     }
-    return `${this.title} by ${this.author}, ${this.pages} pages, not read yet.`;
+    return `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${this.title}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">${this.author}</h6>
+      <p class="card-text">
+      ${this.pages} pages, not read yet.
+      </p>
+    </div>
+  </div>`;
   };
 }
 
@@ -21,7 +38,7 @@ function render(books){
   books.forEach(
     function(b){
       // Output to HTML
-      console.log(b.info());
+      document.getElementById("books_list").innerHTML += b.info();
     }
   );
 }
