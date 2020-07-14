@@ -1,4 +1,4 @@
-localStorage.clear();
+// localStorage.clear();
 
 let books = [];
 
@@ -22,16 +22,17 @@ Book.prototype.info = function() {
 };
 
 if(localStorage.getItem('books_array')) {
-  books = JSON.parse(localStorage.getItem("books_array") || "[]");
-  books.forEach(
-    b => {
-      b.prototype = Object.create(Book.prototype)
-    }
-  );
+  books = JSON.parse(localStorage.getItem("books_array") || "[]").map(book => Object.assign(new Book(), book));
+  // books.forEach(
+  //   b => {
+  //     b.prototype = Object.create(Book.prototype)
+  //   }
+  // );
   console.log(books);
 }
 
 function localStoreBooks(books){
+  localStorage.clear();
   localStorage.setItem("books_array", JSON.stringify(books));
 }
 
@@ -63,6 +64,7 @@ function readBook(index) {
   else {
     books[index].read = true;
   }
+  localStoreBooks(books);
 }
 
 function render(books) {
@@ -109,9 +111,9 @@ document.getElementById('btnAddBook').addEventListener('click', () => {
   render(books);
 });
 
-addBook('Lazarillo de Tormes', 'Anonymous', 100, false);
-addBook('Divine Comedy', 'Dante Alighieri', 200, true);
-addBook('Object-Oriented Programming', 'Luis Joyanes Aguilar', 300, false);
-addBook('Data Structures', 'Osvaldo Cairo', 200, true);
+// addBook('Lazarillo de Tormes', 'Anonymous', 100, false);
+// addBook('Divine Comedy', 'Dante Alighieri', 200, true);
+// addBook('Object-Oriented Programming', 'Luis Joyanes Aguilar', 300, false);
+// addBook('Data Structures', 'Osvaldo Cairo', 200, true);
 
 render(books);
