@@ -1,72 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-      crossorigin="anonymous"
-    />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="frmNewBook" class="card d-none">
-      <div class="card-header"><h3>New Book</h3></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous" />
+  <title>Microverse Library</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light mb-4">
+    <span class="navbar-brand mb-0 h1">Microverse Library</span>
+  </nav>
+  <main class="container">
+    <div id="frmNewBook" class="card mb-3 d-none">
+      <div class="card-header">
+        <h4>New Book</h4>
+      </div>
       <div class="card-body">
         <div class="form-group">
           <label for="txtTitle">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="txtTitle"
-            placeholder="Title"
-          />
+          <input type="text" class="form-control" id="txtTitle" placeholder="Title" />
         </div>
         <div class="form-group">
           <label for="txtAuthor">Author</label>
-          <input
-            type="text"
-            class="form-control"
-            id="txtAuthor"
-            placeholder="Author"
-          />
+          <input type="text" class="form-control" id="txtAuthor" placeholder="Author" />
         </div>
         <div class="form-group">
           <label for="txtPages">Pages</label>
-          <input
-            type="number"
-            class="form-control"
-            id="txtPages"
-            placeholder="Pages"
-          />
+          <input type="number" class="form-control" id="txtPages" placeholder="Pages" />
         </div>
-        <div class="form-check">
+        <div class="form-check mb-3">
           <input type="checkbox" class="form-check-input" id="chkRead" />
           <label class="form-check-label" for="chkRead">Already read</label>
         </div>
-        <button id="addBook" type="submit" class="btn btn-primary">Add</button>
+        <button id="btnAddBook" type="submit" class="btn btn-primary">Save</button>
       </div>
     </div>
+    <button id="btnNewBook" class="btn btn-secondary">New Book</button>
+    <hr>
+    <div id="books_list" class="d-flex flex-wrap justify-content-center mt-3"></div>
+  </main>
+  <script src="script/script.js"></script>
+</body>
 
-    <button id="btnNewBook" class="btn btn-secondary mt-3">New Book</button>
-
-    <div id="books_list"></div>
-
-    <script src="script/script.js"></script>
-  </body>
 </html>
