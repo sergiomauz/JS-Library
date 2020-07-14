@@ -39,9 +39,20 @@ function altForm() {
   }
 }
 
+function clearForm(){
+   document.getElementById('txtTitle').value = '';
+   document.getElementById('txtAuthor').value = '';
+   document.getElementById('txtPages').value = '';
+   document.getElementById('chkRead').checked = true;
+}
+
 function addBook(title, author, pages, read) {
-  books.push(new Book(title, author, pages, read));
-  localStoreBooks(books);
+  if(isValidBook(title, author, pages)){
+    books.push(new Book(title, author, pages, read));
+    localStoreBooks(books);  
+    altForm();
+    clearForm();
+  }
 }
 
 function removeBook(index) {
@@ -58,20 +69,35 @@ function readBook(index) {
   localStoreBooks(books);
 }
 
-function isValidBook(title, author, pages, read) {
+function isValidBook(title, author, pages) {
+  document.getElementById('invalid-data').className = 'alert alert-danger d-none';
+  document.getElementById('invalid-author').className = 'alert alert-danger d-none';
+  document.getElementById('invalid-title').className = 'alert alert-danger d-none';
+  document.getElementById('invalid-pages').className = 'alert alert-danger d-none';
+  const numbers = /^[0-9]+$/;
+  let valid = true;
   if (title.length === 0) {
-    return false;
+    document.getElementById('invalid-data').className = 'alert alert-danger';
+    document.getElementById('invalid-title').className = 'alert alert-danger';
+    valid = false;
   }
-  else if (author.length === 0) {
-    return false;
+  if (author.length === 0) {
+    document.getElementById('invalid-data').className = 'alert alert-danger';
+    document.getElementById('invalid-author').className = 'alert alert-danger';
+    valid = false;
   }
-  else if (pages === 0) {
-    return false;
+  if (!pages.toString().match(numbers)) {
+    document.getElementById('invalid-data').className = 'alert alert-danger';
+    document.getElementById('invalid-pages').className = 'alert alert-danger';
+    valid = false;
   }
-  else if (author.length === 0) {
-    return false;
+  if(valid){
+    document.getElementById('invalid-data').className = 'alert alert-danger d-none';
+    document.getElementById('invalid-author').className = 'alert alert-danger d-none';
+    document.getElementById('invalid-title').className = 'alert alert-danger d-none';
+    document.getElementById('invalid-pages').className = 'alert alert-danger d-none';
   }
-  return true;
+  return valid;
 }
 
 function render(books) {
