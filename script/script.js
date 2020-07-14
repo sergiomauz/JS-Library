@@ -29,10 +29,19 @@ function altForm() {
   }
 }
 
+function addBook(title, author, pages, read) {
+  books.push(new Book(title, author, pages, read));
+}
+
+function removeBook(index) {
+  books.splice(index,1);
+  document.querySelector(`[data-bookid='book_${index}']`).remove();
+}
+
 function render(books) {
   let html = '';
   books.forEach((b, i) => {
-    html += `<div data-attribute='book_${i}' class='card m-1 bg-light' style='width: 15rem;'>
+    html += `<div data-bookid='book_${i}' class='card m-1 bg-light' style='width: 15rem;'>
               <div class='card-body'>
                 ${b.info()}      
                 <button id='btnBook_${i}' class='btn btn-danger'>Remove</button>
@@ -40,22 +49,11 @@ function render(books) {
             </div>`;
   });
   document.getElementById('books_list').innerHTML = html;
-}
-
-function renderLast(books) {
-  const html = `<div data-attribute='book_${books.length - 1}' class='card m-1 bg-light' style='width: 15rem;'>
-                  ${books[books.length - 1].info()}
-                </div>`;
-  document.getElementById('books_list').innerHTML += html;
-  altForm();
-}
-
-function addBook(title, author, pages, read) {
-  books.push(new Book(title, author, pages, read));
-}
-
-function removeBook(index) {
-  books.splice(index, 1)
+  books.forEach((b, i) =>{
+    document.getElementById(`btnBook_${i}`).addEventListener('click', () => {
+      removeBook(i);
+    });
+  });
 }
 
 document.getElementById('btnNewBook').addEventListener('click', () => {
@@ -69,7 +67,7 @@ document.getElementById('btnAddBook').addEventListener('click', () => {
   const read = document.getElementById('chkRead').checked;
 
   addBook(title, author, pages, read);
-  renderLast(books);
+  render(books);
 });
 
 addBook('Lazarillo de Tormes', 'Anonymous', 100, false);
