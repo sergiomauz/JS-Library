@@ -10,13 +10,11 @@ function Book(title, author, pages, read) {
     if (!this.read) {
       wasRead = 'not read yet';
     }
-    return `<div class='card-body'>
-              <h5 class='card-title'>${this.title}</h5>
-              <h6 class='card-subtitle mb-2 text-muted'>${this.author}</h6>
-              <p class='card-text'>
-                ${this.pages} pages, ${wasRead}.
-              </p>
-            </div>`;
+    return `<h5 class='card-title'>${this.title}</h5>
+            <h6 class='card-subtitle mb-2 text-muted'>${this.author}</h6>
+            <p class='card-text'>
+              ${this.pages} pages, ${wasRead}.
+            </p>`;
   };
 }
 
@@ -35,7 +33,10 @@ function render(books) {
   let html = '';
   books.forEach((b, i) => {
     html += `<div data-attribute='book_${i}' class='card m-1 bg-light' style='width: 15rem;'>
-              ${b.info()}
+              <div class='card-body'>
+                ${b.info()}      
+                <button id='btnBook_${i}' class='btn btn-danger'>Remove</button>
+              </div>
             </div>`;
   });
   document.getElementById('books_list').innerHTML = html;
@@ -51,6 +52,10 @@ function renderLast(books) {
 
 function addBook(title, author, pages, read) {
   books.push(new Book(title, author, pages, read));
+}
+
+function removeBook(index) {
+  books.splice(index, 1)
 }
 
 document.getElementById('btnNewBook').addEventListener('click', () => {
