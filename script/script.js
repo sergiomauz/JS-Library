@@ -7,7 +7,7 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-Book.prototype.info = function() {
+Book.prototype.info = function inf() {
   let wasRead = 'already read';
   if (!this.read) {
     wasRead = 'not read yet';
@@ -19,14 +19,13 @@ Book.prototype.info = function() {
           </p>`;
 };
 
-if(localStorage.getItem('books_array')) {
-  books = JSON.parse(localStorage.getItem("books_array") || "[]").map(book => Object.assign(new Book(), book));
-  console.log(books);
+if (localStorage.getItem('books_array')) {
+  books = JSON.parse(localStorage.getItem('books_array') || '[]').map(book => Object.assign(new Book(), book));
 }
 
-function localStoreBooks(books){
+function localStoreBooks(books) {
   localStorage.clear();
-  localStorage.setItem("books_array", JSON.stringify(books));
+  localStorage.setItem('books_array', JSON.stringify(books));
 }
 
 function altForm() {
@@ -53,8 +52,7 @@ function removeBook(index) {
 function readBook(index) {
   if (books[index].read) {
     books[index].read = false;
-  }
-  else {
+  } else {
     books[index].read = true;
   }
   localStoreBooks(books);
