@@ -39,34 +39,11 @@ function altForm() {
   }
 }
 
-function clearForm(){
-   document.getElementById('txtTitle').value = '';
-   document.getElementById('txtAuthor').value = '';
-   document.getElementById('txtPages').value = '';
-   document.getElementById('chkRead').checked = true;
-}
-
-function addBook(title, author, pages, read) {
-  if(isValidBook(title, author, pages)){
-    books.push(new Book(title, author, pages, read));
-    localStoreBooks(books);  
-    altForm();
-    clearForm();
-  }
-}
-
-function removeBook(index) {
-  books.splice(index, 1);
-  localStoreBooks(books);
-}
-
-function readBook(index) {
-  if (books[index].read) {
-    books[index].read = false;
-  } else {
-    books[index].read = true;
-  }
-  localStoreBooks(books);
+function clearForm() {
+  document.getElementById('txtTitle').value = '';
+  document.getElementById('txtAuthor').value = '';
+  document.getElementById('txtPages').value = '';
+  document.getElementById('chkRead').checked = true;
 }
 
 function isValidBook(title, author, pages) {
@@ -91,7 +68,7 @@ function isValidBook(title, author, pages) {
     document.getElementById('invalid-pages').className = 'alert alert-danger';
     valid = false;
   }
-  if(valid){
+  if (valid) {
     document.getElementById('invalid-data').className = 'alert alert-danger d-none';
     document.getElementById('invalid-author').className = 'alert alert-danger d-none';
     document.getElementById('invalid-title').className = 'alert alert-danger d-none';
@@ -100,13 +77,36 @@ function isValidBook(title, author, pages) {
   return valid;
 }
 
+function addBook(title, author, pages, read) {
+  if (isValidBook(title, author, pages)) {
+    books.push(new Book(title, author, pages, read));
+    localStoreBooks(books);
+    altForm();
+    clearForm();
+  }
+}
+
+function removeBook(index) {
+  books.splice(index, 1);
+  localStoreBooks(books);
+}
+
+function readBook(index) {
+  if (books[index].read) {
+    books[index].read = false;
+  } else {
+    books[index].read = true;
+  }
+  localStoreBooks(books);
+}
+
 function render(books) {
   let html = '';
   books.forEach((b, i) => {
     let strButtonReadName = 'Read';
     let strButtonReadClass = 'success';
     if (books[i].read) {
-      strButtonReadName = 'Reset';
+      strButtonReadName = 'Unread';
       strButtonReadClass = 'warning';
     }
     html += `<div data-bookid='book_${i}' class='card m-1 bg-light' style='width: 15rem;'>
