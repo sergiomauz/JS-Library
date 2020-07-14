@@ -58,6 +58,22 @@ function readBook(index) {
   localStoreBooks(books);
 }
 
+function isValidBook(title, author, pages, read) {
+  if (title.length === 0) {
+    return false;
+  }
+  else if (author.length === 0) {
+    return false;
+  }
+  else if (pages === 0) {
+    return false;
+  }
+  else if (author.length === 0) {
+    return false;
+  }
+  return true;
+}
+
 function render(books) {
   let html = '';
   books.forEach((b, i) => {
