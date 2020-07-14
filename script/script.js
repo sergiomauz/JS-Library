@@ -34,24 +34,44 @@ function addBook(title, author, pages, read) {
 }
 
 function removeBook(index) {
-  books.splice(index,1);
-  document.querySelector(`[data-bookid='book_${index}']`).remove();
+  books.splice(index, 1);
+}
+
+function readBook(index) {
+  if (books[index].read) {
+    books[index].read = false;
+  }
+  else {
+    books[index].read = true;
+  }
 }
 
 function render(books) {
   let html = '';
   books.forEach((b, i) => {
+    let strButtonReadName = 'Read';
+    let strButtonReadClass = 'success';
+    if (books[i].read) {
+      strButtonReadName = 'Reset';
+      strButtonReadClass = 'warning';
+    }
     html += `<div data-bookid='book_${i}' class='card m-1 bg-light' style='width: 15rem;'>
               <div class='card-body'>
-                ${b.info()}      
-                <button id='btnBook_${i}' class='btn btn-danger'>Remove</button>
+                ${b.info()}
+                <button id='btnReadBook_${i}' class='btn btn-${strButtonReadClass}'>${strButtonReadName}</button>
+                <button id='btnRemoveBook_${i}' class='btn btn-danger'>Remove</button>
               </div>
             </div>`;
   });
   document.getElementById('books_list').innerHTML = html;
-  books.forEach((b, i) =>{
-    document.getElementById(`btnBook_${i}`).addEventListener('click', () => {
+  books.forEach((b, i) => {
+    document.getElementById(`btnReadBook_${i}`).addEventListener('click', () => {
+      readBook(i);
+      render(books);
+    });
+    document.getElementById(`btnRemoveBook_${i}`).addEventListener('click', () => {
       removeBook(i);
+      render(books);
     });
   });
 }
