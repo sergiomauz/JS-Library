@@ -1,3 +1,5 @@
+localStorage.clear();
+
 let books = [];
 
 function Book(title, author, pages, read) {
@@ -5,17 +7,32 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = () => {
-    let wasRead = 'already read';
-    if (!this.read) {
-      wasRead = 'not read yet';
+}
+
+Book.prototype.info = function() {
+  let wasRead = 'already read';
+  if (!this.read) {
+    wasRead = 'not read yet';
+  }
+  return `<h5 class='card-title'>${this.title}</h5>
+          <h6 class='card-subtitle mb-2 text-muted'>${this.author}</h6>
+          <p class='card-text'>
+            ${this.pages} pages, ${wasRead}.
+          </p>`;
+};
+
+if(localStorage.getItem('books_array')) {
+  books = JSON.parse(localStorage.getItem("books_array") || "[]");
+  books.forEach(
+    b => {
+      b.prototype = Object.create(Book.prototype)
     }
-    return `<h5 class='card-title'>${this.title}</h5>
-            <h6 class='card-subtitle mb-2 text-muted'>${this.author}</h6>
-            <p class='card-text'>
-              ${this.pages} pages, ${wasRead}.
-            </p>`;
-  };
+  );
+  console.log(books);
+}
+
+function localStoreBooks(books){
+  localStorage.setItem("books_array", JSON.stringify(books));
 }
 
 function altForm() {
@@ -31,10 +48,12 @@ function altForm() {
 
 function addBook(title, author, pages, read) {
   books.push(new Book(title, author, pages, read));
+  localStoreBooks(books);
 }
 
 function removeBook(index) {
   books.splice(index, 1);
+  localStoreBooks(books);
 }
 
 function readBook(index) {
